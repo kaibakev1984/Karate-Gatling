@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "username": "kvasquez",
+    "firstName": "Kevin",
+    "lastName": "Vasquez",
+    "email": "kvasquez@icbc.com.ar",
+    "password": "qwerty",
+    "phone": "0111111111",
+    "userStatus": 0
+  }
+]
