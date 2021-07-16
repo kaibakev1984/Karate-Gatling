@@ -25,23 +25,17 @@
             <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
             <version>4.11.2</version>
         </dependency>
-
-        <!-- These are the log4j dependencies -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -61,7 +55,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
@@ -74,8 +67,6 @@
             <version>${karate.version}</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -115,8 +106,8 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling.plugin.version}</version>
                 <configuration>
-                    <simulationsFolder>src/test/java/conduitApp/performance</simulationsFolder>
-                    <configFolder>src/test/java/conduitApp/performance/data</configFolder>
+                    <simulationsFolder>src/test/java/performance</simulationsFolder>
+                    <configFolder>src/test/java/performance/data</configFolder>
                 </configuration>
             </plugin>
         </plugins>
