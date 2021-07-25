@@ -1,4 +1,5 @@
 Feature: New Article
+  User Think Time
 
   Background: Preconditions
     * url apiUrl
@@ -10,15 +11,9 @@ Feature: New Article
     * set articleRequestBody.article.title = jsonResult.title
     * set articleRequestBody.article.description = jsonResult.description
     * set articleRequestBody.article.body = jsonResult.body
-
-  Scenario: User Creates New Article
-    Given path 'articles'
-    And request articleRequestBody
-    When method POST
-    Then status 200
-    And match response.article.title == articleRequestBody.article.title
-    And match response.article.description == articleRequestBody.article.description
-    And match response.article.body == articleRequestBody.article.body
+    # --- setting user think time
+    * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
+    * def pause = karate.get('__gatling.pause', sleep)
 
   Scenario: User Create And Deletes And Article
     Given path 'articles'
@@ -26,19 +21,9 @@ Feature: New Article
     When method POST
     Then status 200
     * def articleId = response.article.slug
-
-    Given params { limit: 10, offset: 0}
-    And path 'articles'
-    When method GET
-    Then status 200
-    And match response.articles[0].title == articleRequestBody.article.title
+    * header karate-name = 'Setting pause of 5 seconds'
+    * pause(5000)
 
     Given path 'articles',articleId
     When method DELETE
     Then status 200
-
-    Given params { limit: 10, offset: 0 }
-    And path 'articles'
-    When method GET
-    Then status 200
-    And match response.articles[0].title != articleRequestBody.article.title
