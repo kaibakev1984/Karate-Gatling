@@ -19,26 +19,3 @@ Feature: New Article
     And match response.article.title == articleRequestBody.article.title
     And match response.article.description == articleRequestBody.article.description
     And match response.article.body == articleRequestBody.article.body
-
-  Scenario: User Create And Deletes And Article
-    Given path 'articles'
-    And request articleRequestBody
-    When method POST
-    Then status 200
-    * def articleId = response.article.slug
-
-    Given params { limit: 10, offset: 0}
-    And path 'articles'
-    When method GET
-    Then status 200
-    And match response.articles[0].title == articleRequestBody.article.title
-
-    Given path 'articles',articleId
-    When method DELETE
-    Then status 200
-
-    Given params { limit: 10, offset: 0 }
-    And path 'articles'
-    When method GET
-    Then status 200
-    And match response.articles[0].title != articleRequestBody.article.title
