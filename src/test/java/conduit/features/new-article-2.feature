@@ -21,7 +21,7 @@ Feature: New Article
     When method POST
     Then status 200
     * def articleId = response.article.slug
-    * header karate-name = 'Setting pause of 5 seconds'
+
     * pause(5000)
 
     Given path 'articles',articleId
