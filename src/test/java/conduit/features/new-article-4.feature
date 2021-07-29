@@ -9,7 +9,7 @@ Feature: New Article
     * def jsonResult = dataGenerator.getRandomArticleValues()
     # --- setting values to article request body ---
     * set articleRequestBody.article.title = "Karate Gatling - SQUALY3"
-    * set articleRequestBody.article.description = "This is a description xddd"
+    * set articleRequestBody.article.description = "This is a description"
     * set articleRequestBody.article.body = jsonResult.body
 
   Scenario: User Create And Deletes And Article

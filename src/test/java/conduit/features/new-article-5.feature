@@ -21,7 +21,7 @@ Feature: New Article
     And match response.article.description == articleRequestBody.article.description
     And match response.article.body == articleRequestBody.article.body
 
-  Scenario: User Create And Deletes And Article
+  Scenario: User Creates And Deletes And Article
     Given path 'articles'
     And request articleRequestBody
     When method POST
