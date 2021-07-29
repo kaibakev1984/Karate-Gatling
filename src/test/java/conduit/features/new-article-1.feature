@@ -7,8 +7,8 @@ Feature: New Article
     * def dataGenerator = Java.type('utils.DataGenerator')
     * def jsonResult = dataGenerator.getRandomArticleValues()
     # --- setting values to article request body ---
-    * set articleRequestBody.article.title = "Karate Gatling - SQUALY3"
-    * set articleRequestBody.article.description = "It's a karate-gatling presentation"
+    * set articleRequestBody.article.title = "SQUALY3 - " + jsonResult.title
+    * set articleRequestBody.article.description = jsonResult.description
     * set articleRequestBody.article.body = "It's the content of this article"
 
   Scenario: User Creates New Article
