@@ -17,24 +17,24 @@ class PerfTest extends Simulation {
 
   protocol.nameResolver = (req, ctx) => req.getHeader("karate-name")
 
-  //val csvFeeder = csv("articles.csv").circular // use a comma separator
+  val csvFeeder = csv("pet-names.csv").circular // use a comma separator
 
   //val tokenFeeder = Iterator.continually(Map("token" -> CreateTokens.getNextToken))
 
   val createArticle = scenario("Create and delete article")
-    //.feed(csvFeeder)
+    .feed(csvFeeder)
     //.feed(tokenFeeder)
-    .exec(karateFeature("classpath:petswagger/features/petswagger-example-4.feature"))
+    .exec(karateFeature("classpath:petswagger/features/petswagger-example-5.feature"))
 
   setUp(
     createArticle.inject(
       atOnceUsers(3),
-      //nothingFor(4 seconds),
-      //constantUsersPerSec(1) during(3 seconds),
-      //constantUsersPerSec(2) during(10 seconds),
-      //rampUsersPerSec(2) to 10 during(20 seconds),
-      //nothingFor(5 seconds),
-      //constantUsersPerSec(1) during (10 seconds)
+      nothingFor(4 seconds),
+      constantUsersPerSec(1) during(3 seconds),
+      constantUsersPerSec(2) during(10 seconds),
+      rampUsersPerSec(2) to 10 during(20 seconds),
+      nothingFor(5 seconds),
+      constantUsersPerSec(1) during (10 seconds)
     ).protocols(protocol)
   )
 }
