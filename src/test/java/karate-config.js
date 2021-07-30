@@ -1,7 +1,7 @@
 function fn(){
     var env = karate.env;
     if(!env) {
-        env = "dev";
+        env = "pet";
     };
     karate.log("karate environment system property is: ", env);
     var config = {
@@ -12,12 +12,17 @@ function fn(){
     if (env == 'dev') {
         config.userEmail = 'karate@test.com'
         config.userPassword = 'karate123'
-    };
+    }
 
     if (env == 'qa') {
         config.userEmail = 'karate2@test.com'
         config.userPassword = 'Karate456'
-    };
+    }
+    if (env != "pet") {
+       // --- conduit config ---
+       var accessToken = karate.callSingle('classpath:utils/reusable_steps/create-token.feature', config).authToken;
+       karate.configure('headers', {Authorization: 'Token ' + accessToken});
+    }
     // --- conduit config ---
    // var accessToken = karate.callSingle('classpath:utils/reusable_steps/create-token.feature', config).authToken;
    // karate.configure('headers', {Authorization: 'Token ' + accessToken});
