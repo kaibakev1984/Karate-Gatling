@@ -1,4 +1,5 @@
 Feature: Petswagger
+  User Think Time Example
 
   Background: Preconditions
     * def version = "v2"
@@ -13,6 +14,9 @@ Feature: Petswagger
     * set requestBody.name = "Pet " + jsonResult.title
     * set requestBody.category.name = "Category " + jsonResult.description
     * set responseBody.id = idPet
+        # --- setting user think time ---
+    * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
+    * def pause = karate.get('__gatling.pause', sleep)
 
   Scenario: Add a new pet to the store
     Given url petUrl + "/" + version + "/"
@@ -36,7 +40,8 @@ Feature: Petswagger
     When method POST
     Then status 200
     And match response == responseBody
-
+    # --- using pause ---
+    * pause(5000)
     Given url petUrl + "/" + version + "/"
     And path operation + "/1"
     When method GET
