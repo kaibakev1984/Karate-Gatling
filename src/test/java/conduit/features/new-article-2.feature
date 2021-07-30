@@ -11,7 +11,7 @@ Feature: New Article
     * set articleRequestBody.article.title = jsonResult.title
     * set articleRequestBody.article.description = jsonResult.description
     * set articleRequestBody.article.body = jsonResult.body
-    # --- setting user think time
+    # --- setting user think time ---
     * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
     * def pause = karate.get('__gatling.pause', sleep)
 
@@ -21,9 +21,8 @@ Feature: New Article
     When method POST
     Then status 200
     * def articleId = response.article.slug
-
+    # --- using pause ---
     * pause(5000)
-
     Given path 'articles',articleId
     When method DELETE
     Then status 200

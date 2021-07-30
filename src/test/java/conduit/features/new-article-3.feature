@@ -1,5 +1,5 @@
 Feature: New Article
-  Feeder Example: Non-Header karate-name
+  Name Resolver Example: Non-Header karate-name
 
   Background: Preconditions
     * url apiUrl
@@ -8,10 +8,9 @@ Feature: New Article
     * def dataGenerator = Java.type('utils.DataGenerator')
     * def jsonResult = dataGenerator.getRandomArticleValues()
     # --- setting values to article request body ---
-    * set articleRequestBody.article.title = "Karate Gatling - SQUALY3"
-    * set articleRequestBody.article.description = "Esta es una descripción xddd"
+    * set articleRequestBody.article.title = "SQUALY3 - " + jsonResult.title
+    * set articleRequestBody.article.description = jsonResult.description
     * set articleRequestBody.article.body = jsonResult.body
-
 
   Scenario: User Create And Deletes And Article
     Given path 'articles'
