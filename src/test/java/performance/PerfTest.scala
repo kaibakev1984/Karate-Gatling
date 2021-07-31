@@ -24,17 +24,17 @@ class PerfTest extends Simulation {
   val createArticle = scenario("Create and delete article")
     .feed(csvFeeder)
     //.feed(tokenFeeder)
-    .exec(karateFeature("classpath:petswagger/features/petswagger-example-5.feature"))
+    .exec(karateFeature("classpath:petswagger/features/gatling-feeder-example.feature"))
 
   setUp(
     createArticle.inject(
       atOnceUsers(3),
-      nothingFor(4 seconds),
-      constantUsersPerSec(1) during(3 seconds),
-      constantUsersPerSec(2) during(10 seconds),
-      rampUsersPerSec(2) to 10 during(20 seconds),
-      nothingFor(5 seconds),
-      constantUsersPerSec(1) during (10 seconds)
+      //nothingFor(4 seconds),
+      //constantUsersPerSec(1) during(3 seconds),
+      //constantUsersPerSec(2) during(10 seconds),
+      //rampUsersPerSec(2) to 10 during(20 seconds),
+      //nothingFor(5 seconds),
+      //constantUsersPerSec(1) during (10 seconds)
     ).protocols(protocol)
   )
 }
