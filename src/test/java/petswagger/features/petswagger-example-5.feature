@@ -8,6 +8,7 @@ Feature: Petswagger
     * def jsonResult = dataGenerator.getRandomArticleValues()
     * def requestBody = read('../request/petswagger-example-1.json')
     * def responseBody = read('../response/petswagger-example-1.json')
+<<<<<<< HEAD
     # --- setting values to request body | Using __gatling feeder---
     * def idPet = 1
     * set requestBody.id = idPet
@@ -15,6 +16,15 @@ Feature: Petswagger
     * set requestBody.category.name = "Category " + __gatling.Description
     * set responseBody.id = idPet
         # --- setting user think time ---
+=======
+    # --- setting values to request body using gatling feeder ---
+    * def idPet = 1
+    * set requestBody.id = idPet
+    * set requestBody.name = "Pet " + __gatling.Name
+    * set requestBody.category.name = "Category " + __gatling.Category
+    * set responseBody.id = idPet
+    # --- setting user think time ---
+>>>>>>> feat_conduit
     * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
     * def pause = karate.get('__gatling.pause', sleep)
 
