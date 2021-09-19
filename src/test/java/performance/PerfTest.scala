@@ -24,7 +24,7 @@ class PerfTest extends Simulation {
   val createArticle = scenario("Create and delete article")
     .feed(csvFeeder)
     //.feed(tokenFeeder)
-    .exec(karateFeature("classpath:petswagger/features/petswagger-example-1.feature"))
+    .exec(karateFeature("classpath:petswagger/features/pet-example-1.feature"))
 
   setUp(
     createArticle.inject(
