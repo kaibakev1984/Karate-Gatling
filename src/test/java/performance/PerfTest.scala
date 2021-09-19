@@ -21,6 +21,7 @@ class PerfTest extends Simulation {
 
   //val tokenFeeder = Iterator.continually(Map("token" -> CreateTokens.getNextToken))
 
+  // Change path to create Articles
   val createArticle = scenario("Create and delete article")
     .feed(csvFeeder)
     //.feed(tokenFeeder)
