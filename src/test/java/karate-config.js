@@ -24,15 +24,6 @@ function fn() {
         config.userPassword = 'Karate123'
     }
 
-    // --- in case of unavailable service in contuit app ---
-    if (env != "pet") {
-        // --- conduit config ---
-        petUrl: "https://petstore.swagger.io/"
-        var accessToken = karate.callSingle('classpath:utils/reusable_steps/create-token.feature', config).authToken;
-        karate.configure('headers', {
-            Authorization: 'Token ' + accessToken
-        });
-    }
     // --- conduit config ---
     var accessToken = karate.callSingle('classpath:utils/reusable_steps/create-token.feature', config).authToken;
     karate.configure('headers', {
