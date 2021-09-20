@@ -1,11 +1,11 @@
-package conduitApp.performance
+package performance
 
 import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
 
 import scala.concurrent.duration.DurationInt
 
-import utils.CreateTokens
+// import utils.CreateTokens
 
 class PerfTest extends Simulation {
 
@@ -17,24 +17,27 @@ class PerfTest extends Simulation {
 
   protocol.nameResolver = (req, ctx) => req.getHeader("karate-name")
 
-  val csvFeeder = csv("pet-names.csv").circular // use a comma separator
+  // val csvFeeder = csv("pet-names.csv").circular // use a comma separator
 
   //val tokenFeeder = Iterator.continually(Map("token" -> CreateTokens.getNextToken))
 
   val createArticle = scenario("Create and delete article")
-    .feed(csvFeeder)
+    // .feed(csvFeeder)
     //.feed(tokenFeeder)
-    .exec(karateFeature("classpath:petswagger/features/pet-example-1.feature"))
+    .exec(karateFeature("classpath:petswagger/features/user-example-1.feature"))
+
+  val createUser = scenario("Create and delete user")
+    .exec(karateFeature("classpath:petswagger/features/user-example-3.feature"))
 
   setUp(
-    createArticle.inject(
+    createUser.inject(
       atOnceUsers(3),
       nothingFor(4 seconds),
-      //constantUsersPerSec(1) during(3 seconds),
-      //constantUsersPerSec(2) during(10 seconds),
-      //rampUsersPerSec(2) to 10 during(20 seconds),
-      //nothingFor(5 seconds),
-      //constantUsersPerSec(1) during (10 seconds)
+      // constantUsersPerSec(1) during(3 seconds),
+      // constantUsersPerSec(2) during(10 seconds),
+      // rampUsersPerSec(2) to 10 during(20 seconds),
+      // nothingFor(5 seconds),
+      // constantUsersPerSec(1) during (10 seconds)
     ).protocols(protocol)
   )
 }

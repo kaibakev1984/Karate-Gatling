@@ -1,13 +1,18 @@
 Feature: User
+  Request Flow Using Pauses
 
   Background: Preconditions
+    # --- setting user think time ---
+    * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
+    * def pause = karate.get('__gatling.pause', sleep)
+    # --- getting request and response json body ---
     * def createUserRequestBody = read('classpath:petswagger/request/create-user.json')
     * def createUserResponseBody = read('classpath:petswagger/response/create-user.json')
     * def getUsersByUserNameResponseBody = read('classpath:petswagger/response/get-users-by-username.json')
     * def updateUserRequest = read('classpath:petswagger/request/update-user.json')
     * def deleteUserResponse = read('classpath:petswagger/response/delete-user.json')
 
-  Scenario: Create User
+  Scenario: Create And Delete User
     # --- setting values in request ---
     * set createUserRequestBody.id = environment.userFlow.id
     * set createUserRequestBody.username = environment.userFlow.username
@@ -17,14 +22,16 @@ Feature: User
     * set createUserRequestBody.password = environment.userFlow.password
     * set createUserRequestBody.phone = environment.userFlow.phone
     * set createUserRequestBody.userStatus = environment.userFlow.userStatus
-    Given url apiUrl + apiVersion
+    Given url apiUrl + "/v2/"
     And path "user"
     And request createUserRequestBody
     When method POST
     Then status 200
     And match response == createUserResponseBody
 
-  Scenario: Get Users By User Name
+    # --- setting pause ---
+    # * pause(5000)
+
     # --- setting values in response ---
     * set getUsersByUserNameResponseBody.id = environment.userFlow.id
     * set getUsersByUserNameResponseBody.username = environment.userFlow.username
@@ -34,34 +41,19 @@ Feature: User
     * set getUsersByUserNameResponseBody.password = environment.userFlow.password
     * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
     * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
-    Given url apiUrl + apiVersion
+    Given url apiUrl + "/v2/"
     And path "user/" + environment.userFlow.username
     When method GET
     Then status 200
     And match response == getUsersByUserNameResponseBody
 
-  Scenario: Update user
-    # --- setting values in request ---
-    * set updateUserRequest.id = environment.userFlow.newId
-    * set updateUserRequest.username = environment.userFlow.newUsername
-    * set updateUserRequest.firstName = environment.userFlow.newFirstName
-    * set updateUserRequest.lastName = environment.userFlow.newLastName
-    * set updateUserRequest.email = environment.userFlow.newEmail
-    * set updateUserRequest.password = environment.userFlow.newPassword
-    * set updateUserRequest.phone = environment.userFlow.newPhone
-    * set updateUserRequest.userStatus = environment.userFlow.newUserStatus
-    Given url apiUrl + apiVersion
-    And path "user/Sigma"
-    And request updateUserRequest
-    When method PUT
-    Then status 200
-    And match response == createUserResponseBody
+    # --- setting pause ---
+    # * pause(5000)
 
-  Scenario: Delete User
     # --- setting values in response ---
-    * set deleteUserResponse.message = environment.userFlow.newUsername
-    Given url apiUrl + apiVersion
-    And path "user/" + environment.userFlow.newUsername
+    * set deleteUserResponse.message = environment.userFlow.username
+    Given url apiUrl + "/v2/"
+    And path "user/" + environment.userFlow.username
     When method DELETE
     Then status 200
     And match response == deleteUserResponse
