@@ -5,11 +5,7 @@ import io.gatling.core.Predef._
 
 import scala.concurrent.duration.DurationInt
 
-// import utils.CreateTokens
-
 class PerfTest extends Simulation {
-
-  //CreateTokens.createAccessTokens();
 
   val protocol = karateProtocol(
     "/api/articles/{articleId}" -> Nil
@@ -17,17 +13,11 @@ class PerfTest extends Simulation {
 
   protocol.nameResolver = (req, ctx) => req.getHeader("karate-name")
 
-  // val csvFeeder = csv("pet-names.csv").circular // use a comma separator
-
-  //val tokenFeeder = Iterator.continually(Map("token" -> CreateTokens.getNextToken))
-
-  val createArticle = scenario("Create and delete article")
-    // .feed(csvFeeder)
-    //.feed(tokenFeeder)
-    .exec(karateFeature("classpath:petswagger/features/user-example-1.feature"))
+  val csvFeeder = csv("user-data.csv.zip").unzip.circular // use a comma separator
 
   val createUser = scenario("Create and delete user")
-    .exec(karateFeature("classpath:petswagger/features/user-example-3.feature"))
+    .feed(csvFeeder)
+    .exec(karateFeature("classpath:petswagger/features/user-example-4.feature"))
 
   setUp(
     createUser.inject(

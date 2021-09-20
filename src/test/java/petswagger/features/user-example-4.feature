@@ -1,10 +1,7 @@
 Feature: User
-  Request Flow Using Pauses
+  Using Feeder in Tests
 
   Background: Preconditions
-    # --- setting user think time ---
-    * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
-    * def pause = karate.get('__gatling.pause', sleep)
     # --- getting request and response json body ---
     * def createUserRequestBody = read('classpath:petswagger/request/create-user.json')
     * def createUserResponseBody = read('classpath:petswagger/response/create-user.json')
@@ -13,14 +10,15 @@ Feature: User
     * def deleteUserResponse = read('classpath:petswagger/response/delete-user.json')
 
   Scenario: Create And Delete User
+    * header karate-name = "Create a New User"
     # --- setting values in request ---
     * set createUserRequestBody.id = environment.userFlow.id
-    * set createUserRequestBody.username = environment.userFlow.username
-    * set createUserRequestBody.firstName = environment.userFlow.firstName
-    * set createUserRequestBody.lastName = environment.userFlow.lastName
-    * set createUserRequestBody.email = environment.userFlow.email
-    * set createUserRequestBody.password = environment.userFlow.password
-    * set createUserRequestBody.phone = environment.userFlow.phone
+    * set createUserRequestBody.username = __gatling.Username
+    * set createUserRequestBody.firstName = __gatling.FirstName
+    * set createUserRequestBody.lastName = __gatling.LastName
+    * set createUserRequestBody.email = __gatling.Email
+    * set createUserRequestBody.password = __gatling.Password
+    * set createUserRequestBody.phone = __gatling.Phone
     * set createUserRequestBody.userStatus = environment.userFlow.userStatus
     Given url apiUrl + "/v2/"
     And path "user"
@@ -29,31 +27,27 @@ Feature: User
     Then status 200
     And match response == createUserResponseBody
 
-    # --- setting pause ---
-    * pause(2500)
-
+    * header karate-name = "Get New User"
     # --- setting values in response ---
     * set getUsersByUserNameResponseBody.id = environment.userFlow.id
-    * set getUsersByUserNameResponseBody.username = environment.userFlow.username
-    * set getUsersByUserNameResponseBody.firstName = environment.userFlow.firstName
-    * set getUsersByUserNameResponseBody.lastName = environment.userFlow.lastName
-    * set getUsersByUserNameResponseBody.email = environment.userFlow.email
-    * set getUsersByUserNameResponseBody.password = environment.userFlow.password
-    * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
+    * set getUsersByUserNameResponseBody.username = __gatling.Username
+    * set getUsersByUserNameResponseBody.firstName = __gatling.FirstName
+    * set getUsersByUserNameResponseBody.lastName = __gatling.LastName
+    * set getUsersByUserNameResponseBody.email = __gatling.Email
+    * set getUsersByUserNameResponseBody.password = __gatling.Password
+    * set getUsersByUserNameResponseBody.phone = __gatling.Phone
     * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
     Given url apiUrl + "/v2/"
-    And path "user/" + environment.userFlow.username
+    And path "user/" + __gatling.Username
     When method GET
     Then status 200
     And match response == getUsersByUserNameResponseBody
 
-    # --- setting pause ---
-    * pause(2500)
-
+    * header karate-name = "Delete User"
     # --- setting values in response ---
-    * set deleteUserResponse.message = environment.userFlow.username
+    * set deleteUserResponse.message = __gatling.Username
     Given url apiUrl + "/v2/"
-    And path "user/" + environment.userFlow.username
+    And path "user/" + __gatling.Username
     When method DELETE
     Then status 200
     And match response == deleteUserResponse

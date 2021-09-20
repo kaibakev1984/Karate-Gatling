@@ -2,9 +2,6 @@ Feature: User
   Using Name Resolver in Report
 
   Background: Preconditions
-    # --- setting user think time ---
-    * def sleep = function(ms){ java.lang.Thread.sleep(ms) }
-    * def pause = karate.get('__gatling.pause', sleep)
     # --- getting request and response json body ---
     * def createUserRequestBody = read('classpath:petswagger/request/create-user.json')
     * def createUserResponseBody = read('classpath:petswagger/response/create-user.json')
