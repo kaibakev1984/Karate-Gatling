@@ -35,7 +35,7 @@ Feature: User
     * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
     * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
     Given url apiUrl + apiVersion
-    And path "user/" + environment.userFlow.username
+    And path "user",environment.userFlow.username
     When method GET
     Then status 200
     And match response == getUsersByUserNameResponseBody
@@ -51,7 +51,7 @@ Feature: User
     * set updateUserRequest.phone = environment.userFlow.newPhone
     * set updateUserRequest.userStatus = environment.userFlow.newUserStatus
     Given url apiUrl + apiVersion
-    And path "user/Sigma"
+    And path "user",environment.userFlow.username
     And request updateUserRequest
     When method PUT
     Then status 200
@@ -61,7 +61,7 @@ Feature: User
     # --- setting values in response ---
     * set deleteUserResponse.message = environment.userFlow.newUsername
     Given url apiUrl + apiVersion
-    And path "user/" + environment.userFlow.newUsername
+    And path "user",environment.userFlow.newUsername
     When method DELETE
     Then status 200
     And match response == deleteUserResponse

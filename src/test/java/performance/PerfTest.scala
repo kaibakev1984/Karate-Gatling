@@ -8,7 +8,7 @@ import scala.concurrent.duration.DurationInt
 class PerfTest extends Simulation {
 
   val protocol = karateProtocol(
-    "/api/articles/{articleId}" -> Nil
+    "/v2/user/{username}" -> Nil
   )
 
   protocol.nameResolver = (req, ctx) => req.getHeader("karate-name")
@@ -16,8 +16,8 @@ class PerfTest extends Simulation {
   val csvFeeder = csv("user-data.csv.zip").unzip.circular // use a comma separator
 
   val createUser = scenario("Create and delete user")
-    .feed(csvFeeder)
-    .exec(karateFeature("classpath:petswagger/features/user-example-4.feature"))
+    // .feed(csvFeeder)
+    .exec(karateFeature("classpath:petswagger/features/user-example-1.feature"))
 
   setUp(
     createUser.inject(
