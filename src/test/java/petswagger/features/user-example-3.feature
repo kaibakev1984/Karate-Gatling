@@ -20,7 +20,7 @@ Feature: User
     * set createUserRequestBody.password = environment.userFlow.password
     * set createUserRequestBody.phone = environment.userFlow.phone
     * set createUserRequestBody.userStatus = environment.userFlow.userStatus
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user"
     And request createUserRequestBody
     When method POST
@@ -37,7 +37,7 @@ Feature: User
     * set getUsersByUserNameResponseBody.password = environment.userFlow.password
     * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
     * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user",environment.userFlow.username
     When method GET
     Then status 200
@@ -46,7 +46,7 @@ Feature: User
     * header karate-name = "Delete User"
     # --- setting values in response ---
     * set deleteUserResponse.message = environment.userFlow.username
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user",environment.userFlow.username
     When method DELETE
     Then status 200

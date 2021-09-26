@@ -17,7 +17,7 @@ Feature: User
     * set createUserRequestBody.password = environment.userFlow.password
     * set createUserRequestBody.phone = environment.userFlow.phone
     * set createUserRequestBody.userStatus = environment.userFlow.userStatus
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user"
     And request createUserRequestBody
     When method POST
@@ -34,7 +34,7 @@ Feature: User
     * set getUsersByUserNameResponseBody.password = environment.userFlow.password
     * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
     * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user",environment.userFlow.username
     When method GET
     Then status 200
@@ -50,7 +50,7 @@ Feature: User
     * set updateUserRequest.password = environment.userFlow.newPassword
     * set updateUserRequest.phone = environment.userFlow.newPhone
     * set updateUserRequest.userStatus = environment.userFlow.newUserStatus
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user",environment.userFlow.username
     And request updateUserRequest
     When method PUT
@@ -60,7 +60,7 @@ Feature: User
   Scenario: Delete User
     # --- setting values in response ---
     * set deleteUserResponse.message = environment.userFlow.newUsername
-    Given url apiUrl + apiVersion
+    Given url environment.apiUrl + environment.apiVersion
     And path "user",environment.userFlow.newUsername
     When method DELETE
     Then status 200

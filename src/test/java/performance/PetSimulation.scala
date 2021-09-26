@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 
 import scala.concurrent.duration.DurationInt
 
-class PerfTest extends Simulation {
+class PetSimulation extends Simulation {
 
   val protocol = karateProtocol(
     "/v2/user/{username}" -> Nil
@@ -16,7 +16,7 @@ class PerfTest extends Simulation {
   val csvFeeder = csv("user-data.csv.zip").unzip.circular // use a comma separator
 
   val createUser = scenario("Create and delete user")
-    // .feed(csvFeeder)
+     // .feed(csvFeeder)
     .exec(karateFeature("classpath:petswagger/features/user-example-1.feature"))
 
   setUp(

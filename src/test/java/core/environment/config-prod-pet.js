@@ -1,5 +1,7 @@
 function fn() {
   var environment = {};
+  environment.apiUrl = "https://petstore.swagger.io/";
+  environment.apiVersion ="v2";
   environment.userFlow = {
     id: 2,
     username: "siriusB",
