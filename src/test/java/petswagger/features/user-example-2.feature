@@ -30,7 +30,7 @@ Feature: User
     And match response == createUserResponseBody
 
     # --- setting pause ---
-    * pause(2500)
+    * pause(5000)
 
     # --- setting values in response ---
     * set getUsersByUserNameResponseBody.id = environment.userFlow.id
@@ -48,7 +48,7 @@ Feature: User
     And match response == getUsersByUserNameResponseBody
 
     # --- setting pause ---
-    * pause(2500)
+    * pause(5000)
 
     # --- setting values in response ---
     * set deleteUserResponse.message = environment.userFlow.username
