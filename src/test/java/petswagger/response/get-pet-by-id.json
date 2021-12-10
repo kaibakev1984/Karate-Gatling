@@ -1,0 +1,18 @@
+{
+  "photoUrls": [
+    "string"
+  ],
+  "name": "Macedonio",
+  "id": 10,
+  "category": {
+    "name": "Black",
+    "id": 10
+  },
+  "tags": [
+    {
+      "name": "string",
+      "id": 0
+    }
+  ],
+  "status": "available"
+}

@@ -21,5 +21,13 @@ function fn() {
     newUserStatus: 1
   };
 
+  environment.petFlow = {
+    id: 10,
+    categoryId: 10,
+    categoryName: "Black",
+    name: "Macedonio",
+    status: "available"
+  };
+
   return environment;
 }
