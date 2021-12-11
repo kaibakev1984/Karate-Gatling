@@ -1,10 +1,10 @@
 Feature: Pet
 
   Background: Preconditions
-    * def createPetRequestBody = read('../request/create-pet.json')
-    * def createPetResponseBody = read('../response/create-pet.json')
-    * def getPetByIdResponseBody = read('../response/get-pet-by-id.json')
-    # * def deletePetByIdResponse = read()
+    * def createPetRequestBody = read('../request/pet/create-pet.json')
+    * def createPetResponseBody = read('../response/pet/create-pet.json')
+    * def getPetByIdResponseBody = read('../response/pet/get-pet-by-id.json')
+    * def deletePetByIdResponse = read('../response/pet/delete-pet.json')
 
   Scenario: Create Pet
       # --- setting values in request json body ---
@@ -37,3 +37,13 @@ Feature: Pet
       And match response.category.name == environment.petFlow.categoryName
       And match response.name == environment.petFlow.name
       And match response.status == environment.petFlow.status
+
+      Scenario: Delete Pet By Id
+        Given url environment.apiUrl + environment.apiVersion
+        And path "user", environment.petFlow.id
+        When method DELETE
+        Then status 200
+        And match response == deletePetByIdResponse
+        And match response.code == 200
+        And match response.type == "unknown"
+        And match response.message == "$(environment.petFlow.id)"
