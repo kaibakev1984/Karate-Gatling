@@ -11,6 +11,7 @@ function fn() {
     password: "password123",
     phone: "12345678",
     userStatus: 0,
+    expectedId: "2",
     newId: 3,
     newUsername: "lemuria",
     newFirstName: "Christofer",
@@ -18,7 +19,10 @@ function fn() {
     newEmail: "therion@nuclearblast.com",
     newPassword: "password567",
     newPhone: "87654321",
-    newUserStatus: 1
+    newUserStatus: 1,
+    newExpectedId: "3",
+    code: 200,
+    type: "unknown"
   };
 
   environment.petFlow = {

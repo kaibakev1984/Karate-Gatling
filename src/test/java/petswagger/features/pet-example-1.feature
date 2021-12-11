@@ -13,7 +13,6 @@ Feature: Pet
     * set createPetRequestBody.category.name = environment.petFlow.categoryName
     * set createPetRequestBody.name = environment.petFlow.name
     * set createPetRequestBody.status = environment.petFlow.status
-      # --- setting values in response json body ---
 
     Given url environment.apiUrl + environment.apiVersion
     And path "pet"
