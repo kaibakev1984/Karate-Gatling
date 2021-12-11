@@ -1,10 +1,10 @@
 {
-  "id": 2,
-  "username": "Sigma",
-  "firstName": "Gamma",
-  "lastName": "gamen",
-  "email": "ss12",
-  "password": "1234password",
-  "phone": "12334556",
-  "userStatus": 0
+  "id": "#number",
+  "username": "#string",
+  "firstName": "#string",
+  "lastName": "#string",
+  "email": "#string",
+  "password": "#string",
+  "phone": "#string",
+  "userStatus": "#number"
 }
