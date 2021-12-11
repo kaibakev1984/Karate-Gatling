@@ -23,11 +23,11 @@ class UserSimulation extends Simulation {
     createUser.inject(
       atOnceUsers(10),
       nothingFor(4 seconds),
-      // constantUsersPerSec(1) during(3 seconds),
-      // constantUsersPerSec(2) during(10 seconds),
-      // rampUsersPerSec(2) to 10 during(20 seconds),
-      // nothingFor(5 seconds),
-      // constantUsersPerSec(1) during (10 seconds)
+      constantUsersPerSec(1) during(3 seconds),
+      constantUsersPerSec(2) during(10 seconds),
+      rampUsersPerSec(2) to 10 during(20 seconds),
+      nothingFor(5 seconds),
+      constantUsersPerSec(1) during (10 seconds)
     ).protocols(protocol)
   )
 }
