@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 
 import scala.concurrent.duration.DurationInt
 
-class PetSimulation extends Simulation {
+class UserSimulation extends Simulation {
 
   val protocol = karateProtocol(
     "/v2/user/{username}" -> Nil
