@@ -1,10 +1,10 @@
 Feature: Pet
 
   Background: Preconditions
-    * def createPetRequestBody = read('../request/create-pet.json')
-    * def createPetResponseBody = read('../response/create-pet.json')
-    * def getPetByIdResponseBody = read('../response/get-pet-by-id.json')
-    * def deletePetByIdResponse = read('../response/delete-pet.json')
+    * def createPetRequestBody = read('../request/pet/create-pet.json')
+    * def createPetResponseBody = read('../response/pet/create-pet.json')
+    * def getPetByIdResponseBody = read('../response/pet/get-pet-by-id.json')
+    * def deletePetByIdResponse = read('../response/pet/delete-pet.json')
 
   Scenario: Create Pet
       # --- setting values in request json body ---
