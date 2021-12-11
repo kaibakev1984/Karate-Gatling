@@ -1,6 +1,7 @@
 Feature: Pet
 
   Background: Preconditions
+    * def service = "pet"
     * def createPetRequestBody = read('../request/pet/create-pet.json')
     * def createPetResponseBody = read('../response/pet/create-pet.json')
     * def getPetByIdResponseBody = read('../response/pet/get-pet-by-id.json')
@@ -15,7 +16,7 @@ Feature: Pet
     * set createPetRequestBody.status = environment.petFlow.status
 
     Given url environment.apiUrl + environment.apiVersion
-    And path "pet"
+    And path service
     And request createPetRequestBody
     When method POST
     Then status 200
@@ -28,7 +29,7 @@ Feature: Pet
 
     Scenario: Get Pet By Id
       Given url environment.apiUrl + environment.apiVersion
-      And path "pet", environment.petFlow.id
+      And path service, environment.petFlow.id
       When method GET
       Then status 200
       And match response == getPetByIdResponseBody
@@ -40,10 +41,10 @@ Feature: Pet
 
       Scenario: Delete Pet By Id
         Given url environment.apiUrl + environment.apiVersion
-        And path "user", environment.petFlow.id
+        And path service, environment.petFlow.id
         When method DELETE
         Then status 200
         And match response == deletePetByIdResponse
-        And match response.code == 200
-        And match response.type == "unknown"
-        And match response.message == "$(environment.petFlow.id)"
+        And match response.code == environment.petFlow.code
+        And match response.type == environment.petFlow.type
+        And match response.message == environment.petFlow.expectedId

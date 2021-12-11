@@ -30,6 +30,9 @@ function fn() {
     categoryId: 10,
     categoryName: "Black",
     name: "Macedonio",
+    code: 200,
+    type: "unknown",
+    expectedId: "10",
     status: "available"
   };
 
