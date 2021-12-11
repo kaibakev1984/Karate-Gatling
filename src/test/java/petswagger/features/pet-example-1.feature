@@ -4,7 +4,7 @@ Feature: Pet
     * def createPetRequestBody = read('../request/create-pet.json')
     * def createPetResponseBody = read('../response/create-pet.json')
     * def getPetByIdResponseBody = read('../response/get-pet-by-id.json')
-    # * def deletePetByIdResponse = read()
+    * def deletePetByIdResponse = read('../response/delete-pet.json')
 
   Scenario: Create Pet
       # --- setting values in request json body ---
@@ -44,3 +44,7 @@ Feature: Pet
         And path "user", environment.petFlow.id
         When method DELETE
         Then status 200
+        And match response == deletePetByIdResponse
+        And match response.code == 200
+        And match response.type == "unknown"
+        And match response.message == "$(environment.petFlow.id)"
