@@ -1,11 +1,11 @@
 Feature: User
 
   Background: Preconditions
-    * def createUserRequestBody = read('classpath:petswagger/request/create-user.json')
-    * def createUserResponseBody = read('classpath:petswagger/response/create-user.json')
-    * def getUsersByUserNameResponseBody = read('classpath:petswagger/response/get-users-by-username.json')
-    * def updateUserRequest = read('classpath:petswagger/request/update-user.json')
-    * def deleteUserResponse = read('classpath:petswagger/response/delete-user.json')
+    * def createUserRequestBody = read('classpath:petswagger/request/user/create-user.json')
+    * def createUserResponseBody = read('classpath:petswagger/response/user/create-user.json')
+    * def getUsersByUserNameResponseBody = read('classpath:petswagger/response/user/get-users-by-username.json')
+    * def updateUserRequest = read('classpath:petswagger/request/user/update-user.json')
+    * def deleteUserResponse = read('classpath:petswagger/response/user/delete-user.json')
 
   Scenario: Create User
     # --- setting values in request ---
