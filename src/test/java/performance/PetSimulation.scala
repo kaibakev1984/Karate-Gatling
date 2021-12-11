@@ -5,7 +5,7 @@ import io.gatling.core.Predef._
 
 import scala.concurrent.duration.DurationInt
 
-class UserSimulation extends Simulation {
+class PetSimulation extends Simulation {
 
   val protocol = karateProtocol(
     "/v2/user/{username}" -> Nil
@@ -17,17 +17,17 @@ class UserSimulation extends Simulation {
 
   val createUser = scenario("Petswagger Scenarios")
      // .feed(csvFeeder)
-    .exec(karateFeature("classpath:petswagger/features/user-example-4.feature"))
+    .exec(karateFeature("classpath:petswagger/features/pet-example-1.feature"))
 
   setUp(
     createUser.inject(
       atOnceUsers(10),
       nothingFor(4 seconds),
       constantUsersPerSec(1) during(3 seconds),
-      constantUsersPerSec(2) during(10 seconds),
-      rampUsersPerSec(2) to 10 during(20 seconds),
-      nothingFor(5 seconds),
-      constantUsersPerSec(1) during (10 seconds)
+      // constantUsersPerSec(2) during(10 seconds),
+      // rampUsersPerSec(2) to 10 during(20 seconds),
+      // nothingFor(5 seconds),
+      // constantUsersPerSec(1) during (10 seconds)
     ).protocols(protocol)
   )
 }

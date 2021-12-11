@@ -16,7 +16,7 @@ class UserSimulation extends Simulation {
   val csvFeeder = csv("user-data.csv.zip").unzip.circular // use a comma separator
 
   val createUser = scenario("Petswagger Scenarios")
-     // .feed(csvFeeder)
+    .feed(csvFeeder)
     .exec(karateFeature("classpath:petswagger/features/user-example-4.feature"))
 
   setUp(
