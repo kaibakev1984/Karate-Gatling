@@ -2,17 +2,17 @@
   "photoUrls": [
     "string"
   ],
-  "name": "Macedonio",
-  "id": 10,
+  "name": "#string",
+  "id": "#number",
   "category": {
-    "name": "Black",
-    "id": 10
+    "name": "#string",
+    "id": "#number"
   },
   "tags": [
     {
-      "name": "string",
-      "id": 0
+      "name": "#string",
+      "id": "#number"
     }
   ],
-  "status": "available"
+  "status": "#string"
 }

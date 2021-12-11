@@ -38,3 +38,9 @@ Feature: Pet
       And match response.category.name == environment.petFlow.categoryName
       And match response.name == environment.petFlow.name
       And match response.status == environment.petFlow.status
+
+      Scenario: Delete Pet By Id
+        Given url environment.apiUrl + environment.apiVersion
+        And path "user", environment.petFlow.id
+        When method DELETE
+        Then status 200
