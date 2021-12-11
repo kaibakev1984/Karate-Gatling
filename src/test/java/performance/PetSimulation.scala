@@ -17,7 +17,7 @@ class PetSimulation extends Simulation {
 
   val createUser = scenario("Petswagger Scenarios")
      // .feed(csvFeeder)
-    .exec(karateFeature("classpath:petswagger/features/user-example-1.feature"))
+    .exec(karateFeature("classpath:petswagger/features/user-example-4.feature"))
 
   setUp(
     createUser.inject(
