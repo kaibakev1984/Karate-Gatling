@@ -11,6 +11,7 @@ Feature: User
     * def getUsersByUserNameResponseBody = read('classpath:petswagger/response/user/get-users-by-username.json')
     * def updateUserRequest = read('classpath:petswagger/request/user/update-user.json')
     * def deleteUserResponse = read('classpath:petswagger/response/user/delete-user.json')
+    * def service = "user"
 
   Scenario: Create And Delete User
     # --- setting values in request ---
@@ -22,30 +23,34 @@ Feature: User
     * set createUserRequestBody.password = environment.userFlow.password
     * set createUserRequestBody.phone = environment.userFlow.phone
     * set createUserRequestBody.userStatus = environment.userFlow.userStatus
+
     Given url environment.apiUrl + environment.apiVersion
-    And path "user"
+    And path service
     And request createUserRequestBody
     When method POST
     Then status 200
     And match response == createUserResponseBody
+    And match response.code == environment.userFlow.code
+    And match response.type == environment.userFlow.type
+    And match response.message == environment.userFlow.expectedId
 
     # --- setting pause ---
     * pause(5000)
 
     # --- setting values in response ---
-    * set getUsersByUserNameResponseBody.id = environment.userFlow.id
-    * set getUsersByUserNameResponseBody.username = environment.userFlow.username
-    * set getUsersByUserNameResponseBody.firstName = environment.userFlow.firstName
-    * set getUsersByUserNameResponseBody.lastName = environment.userFlow.lastName
-    * set getUsersByUserNameResponseBody.email = environment.userFlow.email
-    * set getUsersByUserNameResponseBody.password = environment.userFlow.password
-    * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
-    * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
     Given url environment.apiUrl + environment.apiVersion
-    And path "user",environment.userFlow.username
+    And path service,environment.userFlow.username
     When method GET
     Then status 200
     And match response == getUsersByUserNameResponseBody
+    And match response.id == environment.userFlow.id
+    And match response.username == environment.userFlow.username
+    And match response.firstName == environment.userFlow.firstName
+    And match response.lastName == environment.userFlow.lastName
+    And match response.email == environment.userFlow.email
+    And match response.password == environment.userFlow.password
+    And match response.phone == environment.userFlow.phone
+    And match response.userStatus == environment.userFlow.userStatus
 
     # --- setting pause ---
     * pause(5000)
@@ -53,7 +58,7 @@ Feature: User
     # --- setting values in response ---
     * set deleteUserResponse.message = environment.userFlow.username
     Given url environment.apiUrl + environment.apiVersion
-    And path "user",environment.userFlow.username
+    And path service,environment.userFlow.username
     When method DELETE
     Then status 200
     And match response == deleteUserResponse
