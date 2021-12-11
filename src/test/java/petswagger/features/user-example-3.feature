@@ -2,6 +2,7 @@ Feature: User
   Using Name Resolver in Report
 
   Background: Preconditions
+    * def service = "user"
     # --- getting request and response json body ---
     * def createUserRequestBody = read('classpath:petswagger/request/user/create-user.json')
     * def createUserResponseBody = read('classpath:petswagger/response/user/create-user.json')
@@ -21,33 +22,36 @@ Feature: User
     * set createUserRequestBody.phone = environment.userFlow.phone
     * set createUserRequestBody.userStatus = environment.userFlow.userStatus
     Given url environment.apiUrl + environment.apiVersion
-    And path "user"
+    And path service
     And request createUserRequestBody
     When method POST
     Then status 200
     And match response == createUserResponseBody
+    And match response.code == environment.userFlow.code
+    And match response.type == environment.userFlow.type
+    And match response.message == environment.userFlow.expectedId
 
     * header karate-name = "Get New User"
     # --- setting values in response ---
-    * set getUsersByUserNameResponseBody.id = environment.userFlow.id
-    * set getUsersByUserNameResponseBody.username = environment.userFlow.username
-    * set getUsersByUserNameResponseBody.firstName = environment.userFlow.firstName
-    * set getUsersByUserNameResponseBody.lastName = environment.userFlow.lastName
-    * set getUsersByUserNameResponseBody.email = environment.userFlow.email
-    * set getUsersByUserNameResponseBody.password = environment.userFlow.password
-    * set getUsersByUserNameResponseBody.phone = environment.userFlow.phone
-    * set getUsersByUserNameResponseBody.userStatus = environment.userFlow.userStatus
     Given url environment.apiUrl + environment.apiVersion
-    And path "user",environment.userFlow.username
+    And path service,environment.userFlow.username
     When method GET
     Then status 200
     And match response == getUsersByUserNameResponseBody
+    And match response.id == environment.userFlow.id
+    And match response.username == environment.userFlow.username
+    And match response.firstName == environment.userFlow.firstName
+    And match response.lastName == environment.userFlow.lastName
+    And match response.email == environment.userFlow.email
+    And match response.password == environment.userFlow.password
+    And match response.phone == environment.userFlow.phone
+    And match response.userStatus == environment.userFlow.userStatus
 
     * header karate-name = "Delete User"
     # --- setting values in response ---
     * set deleteUserResponse.message = environment.userFlow.username
     Given url environment.apiUrl + environment.apiVersion
-    And path "user",environment.userFlow.username
+    And path service,environment.userFlow.username
     When method DELETE
     Then status 200
     And match response == deleteUserResponse
