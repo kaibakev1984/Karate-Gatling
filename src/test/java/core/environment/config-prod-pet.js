@@ -20,9 +20,7 @@ function fn() {
     newPassword: "password567",
     newPhone: "87654321",
     newUserStatus: 1,
-    newExpectedId: "3",
-    code: 200,
-    type: "unknown"
+    newExpectedId: "3"
   };
 
   environment.petFlow = {
@@ -30,8 +28,6 @@ function fn() {
     categoryId: 10,
     categoryName: "Black",
     name: "Macedonio",
-    code: 200,
-    type: "unknown",
     expectedId: "10",
     status: "available"
   };

@@ -45,6 +45,6 @@ Feature: Pet
         When method DELETE
         Then status 200
         And match response == deletePetByIdResponse
-        And match response.code == environment.petFlow.code
-        And match response.type == environment.petFlow.type
+        And match response.code == constants.code
+        And match response.type == constants.type
         And match response.message == environment.petFlow.expectedId

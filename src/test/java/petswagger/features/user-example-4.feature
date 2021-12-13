@@ -6,10 +6,6 @@ Feature: User
     * def sleep = function(ms) { java.lang.Thread.sleep(ms) }
     * def pause = karate.get('__gatling.pause', sleep)
 
-    # --- assert data ---
-    * def type = "unknown"
-    * def code = 200
-
     # --- getting request and response json body ---
     * def createUserRequestBody = read('classpath:petswagger/request/user/create-user.json')
     * def createUserResponseBody = read('classpath:petswagger/response/user/create-user.json')
@@ -38,8 +34,8 @@ Feature: User
     When method POST
     Then status 200
     And match response == createUserResponseBody
-    And match response.code == code
-    And match response.type == type
+    And match response.code == constants.code
+    And match response.type == constants.type
 
     * pause(2500)
     * header karate-name = "Get New User"

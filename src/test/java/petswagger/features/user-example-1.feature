@@ -61,8 +61,8 @@ Feature: User
     When method PUT
     Then status 200
     And match response == createUserResponseBody
-    And match response.code == 200
-    And match response.type == "unknown"
+    And match response.code == constants.code
+    And match response.type == constants.type
     And match response.message == environment.userFlow.newExpectedId
 
   Scenario: Delete User
@@ -73,6 +73,6 @@ Feature: User
     When method DELETE
     Then status 200
     And match response == deleteUserResponse
-    And match response.code == environment.userFlow.code
-    And match response.type == environment.userFlow.type
+    And match response.code == constants.code
+    And match response.type == constants.type
     And match response.message == environment.userFlow.newUsername
